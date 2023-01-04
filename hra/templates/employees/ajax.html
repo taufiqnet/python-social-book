@@ -1,0 +1,105 @@
+<script>
+    // Insert Data
+    $("#btnsave").click(function () {
+        //console.log("Save Button Clicked")
+        output = "";
+        let dept_id = $("#dept_id").val();
+        let dept_no = $("#deptnoid").val();
+        let dept_name = $("#deptnameid").val();
+        let csr = $("input[name=csrfmiddlewaretoken]").val();
+        if(dept_no == ""){
+            console.log("Please Enter Department Code");
+            $("#msg").text("Please Enter Department Code");
+            $("#msg").show();
+        } else if(dept_name == ""){
+            console.log("Please Enter Department Name");
+            $("#msg").text("Please Enter Department Name");
+            $("#msg").show();
+        } else {
+        // console.log(deptno);
+        // console.log(deptname);
+        mydata = { dept_id: dept_id, dept_no : dept_no, dept_name: dept_name, csrfmiddlewaretoken : csr};
+        $.ajax({
+            url: "{% url 'save' %}",
+            method: "POST",
+            data: mydata,
+            dataType: "json",
+            success: function (data) {
+                //console.log(data.status);
+                x = data.department_data;
+                if(data.status == "Save"){
+                    $("#msg").text("Form Submitted Successfully");
+                    $("#msg").show();
+                    console.log("Form Submitted Successfully");
+                    //console.log(x);
+                    for (i=0; i<x.length; i++){
+                        output += "<tr><td>" + x[i].dept_no + "</td><td>" + x[i].dept_name + "</td><td> <input type='button' class='btn btn-warning btn-sm btn-edit' value='Edit' data-sid=" + x[i].dept_id + "> <input type='button' class='btn btn-danger btn-sm btn-del' value='Delete' data-sid=" + x[i].dept_id + ">";
+                    }
+                    $("#tbody").html(output);
+                    $("#dept_id").val("");
+                    $("form")[0].reset();
+                }
+                if(data.status == 0){
+                    console.log("Unable to save form");
+                    $("#msg").text("Unable to save form");
+                    $("#msg").show();
+                    $("#dept_id").val("");
+                    $("form")[0].reset();
+                }
+            },
+        });
+        }
+    });
+
+    // Delete Data
+    $("tbody").on("click", ".btn-del", function(){
+        //console.log("Delete Button Clicked");
+        let dept_id = $(this).attr("data-sid");
+        let csr = $("input[name=csrfmiddlewaretoken]").val();
+        //console.log(dept_id);
+        mydata = {sid:dept_id, csrfmiddlewaretoken : csr};
+        mythis = this;
+        $.ajax({
+            url: "{% url 'delete' %}",
+            method: "POST",
+            data: mydata,
+            success:function(data){
+                // console.log(data);
+                if(data.status == 1){
+                    console.log("Data Deleted");
+                    $("#msg").text("Deleted Successfully");
+                    $("#msg").show();
+                    $(mythis).closest("tr").fadeOut();
+                }
+                if(data.status == 0){
+                    console.log("Unable to delete data");
+                    $("#msg").text("Unable to Delete Data");
+                    $("#msg").show();
+                }
+            },
+        });
+    });
+
+
+    // Editing Data
+    $("tbody").on("click", ".btn-edit", function(){
+        console.log("Edit Button Clicked");
+        let dept_id = $(this).attr("data-sid");
+        let csr = $("input[name=csrfmiddlewaretoken]").val();
+        console.log(dept_id);
+        mydata = {sid:dept_id, csrfmiddlewaretoken : csr};
+        $.ajax({
+            url: "{% url 'edit' %}",
+            method: "POST",
+            data: mydata,
+            dataType: "json", 
+            success:function(data){
+                //console.log(data);
+                $("#dept_id").val(data.dept_id);
+                $("#deptnoid").val(data.dept_no);
+                $("#deptnameid").val(data.dept_name);
+            },
+        });
+    });
+
+</script>
