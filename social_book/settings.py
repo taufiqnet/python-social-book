@@ -18,9 +18,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'rest_framework',
+    
     'core.apps.CoreConfig', #Social Book App
     'hra.apps.HraConfig', #HRA App
     'inventory.apps.InventoryConfig', #Inventory App
+    
 ]
 
 MIDDLEWARE = [

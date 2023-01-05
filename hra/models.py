@@ -11,7 +11,7 @@ GENDER_CHOICES = (
     )
 
 class Department(models.Model):
-    dept_id = models.IntegerField(primary_key=True)
+    dept_id = models.AutoField(primary_key=True)
     dept_no = models.CharField(_('code'), max_length=9)
     dept_name = models.CharField(_('name'), unique=True, max_length=40)
 

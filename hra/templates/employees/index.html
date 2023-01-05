@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
-    <title>Home</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'hra/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'hra/css/bootstrap.css' %}">
 
@@ -17,55 +17,16 @@
 
 <body>
     <div class="container mt-5">
-        <div class="rows">
-        <div class="col-sm-4">
-            <h4 class="text-center alert alert-info">Add/Update Department</h4>
-            <form action="" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="dept_id" id="dept_id" />
-                {{form.as_p}}
-                <input type="button" class="btn btn-success" id="btnsave" value="Save"/>
-            </form>
-            <p>
-                <div id="msg" class="alert alert-danger" style="display: none">
-
-                </div>
-            </p>
+        <div class="row">
+            <h1>Dashboard</h1>
         </div>
-        <div class="col-sm-8">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Department</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-                    {% for dp in dept %}
-                    <tr>
-                        <td>{{dp.dept_no}}</td>
-                        <td>{{dp.dept_name}}</td>
-                        <td>
-                            <input type="button" data-sid="{{dp.dept_id}}" class="btn btn-warning btn-sm btn-edit" value="Edit">
-                            <input type="button" data-sid="{{dp.dept_id}}" class="btn btn-danger btn-sm btn-del" value="Delete">
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
-        </div>
-        </div>
-
-        
     </div>
 
 
     <script src="{% static 'hra/js/jquery.js' %}"></script>
     <script src="{% static 'hra/js/bootstrap.js' %}"></script>
     
-        {% include "employees/ajax.html" %}
+    
     
 </body>
 
