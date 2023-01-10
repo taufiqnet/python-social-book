@@ -24,6 +24,15 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig', #Social Book App
     'hra.apps.HraConfig', #HRA App
     'inventory.apps.InventoryConfig', #Inventory App
+
+    'profiles.apps.ProfilesConfig',
+    'receivers.apps.ReceiversConfig',
+    'invoices.apps.InvoicesConfig',
+    'positions.apps.PositionsConfig',
+
+    #3rd Party Apps
+    'import_export'
+
     
 ]
 

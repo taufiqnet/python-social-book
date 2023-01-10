@@ -98,7 +98,7 @@ class Salary(models.Model):
         return "{} - {}".format(self.employee, self.salary)
 
 
-
+#This title is not applicable for this project. It is replaced by Designation
 class Title(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, db_column='emp_no', verbose_name=_('employee'))
     title = models.CharField(_('title'), max_length=50)
@@ -114,3 +114,17 @@ class Title(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.employee, self.title)
+    
+    
+class Designation(models.Model):
+    designation = models.CharField(_('designation'), unique=True, max_length=60)
+    description = models.CharField(_('description'), max_length=200, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('designation')
+        verbose_name_plural = _('designations')
+        db_table = 'designations'
+        ordering = ['designation']
+
+    def __str__(self):
+        return self.designation

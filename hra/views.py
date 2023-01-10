@@ -130,6 +130,7 @@ def getRoutes(request):
     return Response(routes)
 
 
+#fucntion based rest api
 @api_view(['GET'])
 def getDepartments(request):
     try:
@@ -179,3 +180,6 @@ def deleteDepartment(request, pk):
     department = Department.objects.get(dept_id=pk)
     department.delete()
     return Response('Department was deleted!')
+
+
+#class based rest API

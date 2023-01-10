@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from datetime import datetime
 from django.utils.html import mark_safe
 
+
 class Category(models.Model):
     name = models.CharField(_('category name'),max_length=255)
     description = models.TextField(_('category description'),null=True, blank=True)
@@ -11,6 +12,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)

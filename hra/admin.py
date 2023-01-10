@@ -39,9 +39,16 @@ class SalaryAdmin(admin.ModelAdmin):
     raw_id_fields = ('employee', )
 
 
-@admin.register(models.Title)
-class TitleAdmin(admin.ModelAdmin):
+# @admin.register(models.Title)
+# class TitleAdmin(admin.ModelAdmin):
+#     icon = '<i class="material-icons">reorder</i>'
+#     list_display = ('employee', 'from_date', 'to_date', 'title')
+#     raw_id_fields = ('employee', )
+#     list_filter = ('title', )
+    
+
+@admin.register(models.Designation)
+class DesignationAdmin(admin.ModelAdmin):
     icon = '<i class="material-icons">reorder</i>'
-    list_display = ('employee', 'from_date', 'to_date', 'title')
-    raw_id_fields = ('employee', )
-    list_filter = ('title', )
+    list_display = ('designation', 'description')
+    list_filter = ('designation', )
