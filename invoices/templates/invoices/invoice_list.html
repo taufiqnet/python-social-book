@@ -1,0 +1,14 @@
+{% extends "invoice_base.html" %}
+
+{% block scripts %} {% endblock scripts %}
+
+{% block title %} home {% endblock title %}
+
+{% block content %}
+
+{% for obj in object_list %}
+    <b>{{obj.number}}</b>
+    <br/>
+{% endfor %}
+
+{% endblock content %}>
